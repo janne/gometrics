@@ -26,6 +26,10 @@ time.
 * Create the Heroku app
 
         $ heroku create -b https://github.com/kr/heroku-buildpack-go.git
+        $ heroku addons:add heroku-postgresql:dev
+        $ heroku addons # Take note of URL color
+        $ heroku pg:promote HEROKU_POSTGRESQL_<COLOR>_URL
+        $ heroku pg:psql < setup.sql
         $ git push heroku master
         $ heroku config:set API_KEY=<YOUR API KEY>
         $ heroku open
