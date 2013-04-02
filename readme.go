@@ -1,11 +1,11 @@
 package main
 
 import (
-  "bufio"
-  "fmt"
-  "github.com/knieriem/markdown"
-  "net/http"
-  "os"
+	"bufio"
+	"fmt"
+	"github.com/knieriem/markdown"
+	"net/http"
+	"os"
 )
 
 func ReadmeHandler(res http.ResponseWriter, req *http.Request) {
