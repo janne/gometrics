@@ -24,7 +24,10 @@ func readme(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprintln(res, err)
 	} else {
 		w := bufio.NewWriter(res)
+		w.WriteString("<html>")
+		w.WriteString(`<head><link href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" rel="stylesheet"></link></head>`)
 		parser.Markdown(file, markdown.ToHTML(w))
+		w.WriteString("</html>")
 		w.Flush()
 	}
 }
