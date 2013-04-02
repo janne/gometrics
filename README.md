@@ -27,4 +27,5 @@ time.
 
         $ heroku create -b https://github.com/kr/heroku-buildpack-go.git
         $ git push heroku master
+        $ heroku config:set API_KEY=<YOUR API KEY>
         $ heroku open
