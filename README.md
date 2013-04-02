@@ -19,3 +19,12 @@ time.
     * Preconfigured to be hosted at Heroku
     * Outputs graphs via Google Graph API
     * Support for backing up all data in CSV format
+
+## Setup
+
+* Create a [Heroku account](https://api.heroku.com/signup) and install the [Heroku Toolchain](https://toolbelt.heroku.com/)
+* Create the Heroku app
+
+        $ heroku create -b https://github.com/kr/heroku-buildpack-go.git
+        $ git push heroku master
+        $ heroku open
