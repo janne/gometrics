@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 type Metric struct {
+	Time  string
 	Key   string
 	Value float32
 }
@@ -26,6 +28,11 @@ func InputHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	for _, m := range metrics {
-		fmt.Fprintln(res, m.Key, "=", m.Value)
+		t, err := time.Parse(time.RFC3339, m.Time)
+		if err != nil {
+			http.Error(res, err.Error(), 400)
+			return
+		}
+		fmt.Fprintf(res, "%v,%v,%v\n", t.Format(time.RFC3339), m.Key, m.Value)
 	}
 }
