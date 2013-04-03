@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"github.com/bmizerany/pq"
 	"io/ioutil"
 	"net/http"
@@ -69,5 +70,7 @@ func InputHandler(res http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			http.Error(res, err.Error(), 500)
 		}
+
+		fmt.Fprintf(res, "Inserted", len(metrics), "records")
 	}
 }
