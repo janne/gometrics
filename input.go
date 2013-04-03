@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/bmizerany/pq"
+	"github.com/bmizerany/pq"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -36,8 +36,13 @@ func InputHandler(res http.ResponseWriter, req *http.Request) {
 			http.Error(res, err.Error(), 400)
 			return
 		}
-		db_url := os.Getenv("DATABASE_URL")
-		db, err := sql.Open("postgres", db_url)
+		dbUrl := os.Getenv("DATABASE_URL")
+		dataSourceName, err := pq.ParseURL(dbUrl)
+		if err != nil {
+			http.Error(res, err.Error(), 500)
+			return
+		}
+		db, err := sql.Open("postgres", dataSourceName)
 		if err != nil {
 			http.Error(res, err.Error(), 500)
 			return
